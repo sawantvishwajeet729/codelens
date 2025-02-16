@@ -153,9 +153,8 @@ with tab1:
 
     if st.button("Process Repository"):
         if repo_url:
-            #delete the session state
-            del st.session_state['all_texts']
-            del st.session_state['embeddings']
+            # Clear session state
+            st.session_state.clear()
 
             #get the repository files and combine
             owner, repo = extract_repo_info(repo_url)
