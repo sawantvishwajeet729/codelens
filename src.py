@@ -11,8 +11,7 @@ from langchain_community.retrievers import BM25Retriever
 import rank_bm25
 import streamlit as st
 
-#git_token = st.secrets['git_token']
-git_token = "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"
+git_token = st.secrets['git_token']
 
 headers = {
     "Authorization": f"Bearer {git_token}",
