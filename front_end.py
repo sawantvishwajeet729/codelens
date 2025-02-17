@@ -9,7 +9,12 @@ from src import *
 #set API key
 os.environ['OPENAI_API_KEY']= st.secrets["openAIKey"]
 groq_key=st.secrets["groqKey"]
+git_token = st.secrets['git_token']
 
+headers = {
+    "Authorization": f"Bearer {git_token}",
+    "Accept": "application/vnd.github.v3+json"
+}
 
 #set up the model
 #initialise the langchain chat prompt template
