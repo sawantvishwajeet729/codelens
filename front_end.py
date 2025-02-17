@@ -7,12 +7,9 @@ from langchain.chains import create_retrieval_chain
 from src import *
 
 #set API key
-#os.environ['OPENAI_API_KEY']= st.secrets["openAIKey"]
-#groq_key=st.secrets["groqKey"]
+os.environ['OPENAI_API_KEY']= st.secrets["openAIKey"]
+groq_key=st.secrets["groqKey"]
 
-#set API key
-os.environ['OPENAI_API_KEY']="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"
-groq_key="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"
 
 #set up the model
 #initialise the langchain chat prompt template

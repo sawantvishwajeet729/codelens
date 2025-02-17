@@ -40,12 +40,10 @@ If you like CodeLens, consider supporting us to keep it running and growing! Eve
 
 ## API Documentation
 ### OpenAI API
-* API key: `os.environ['OPENAI_API_KEY']`
 * Model: `text-embedding-3-large`
 * Dimensions: `1536`
 
 ### Groq API
-* API key: `groq_key`
 * Model: `llama-3.3-70b-versatile`
 * Temperature: `0`
 * Max tokens: `None`
