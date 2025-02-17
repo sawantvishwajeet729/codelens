@@ -9,6 +9,15 @@ from langchain_community.vectorstores import FAISS
 from langchain.retrievers import EnsembleRetriever
 from langchain_community.retrievers import BM25Retriever
 import rank_bm25
+import streamlit as st
+
+#git_token = st.secrets['git_token']
+git_token = "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"
+
+headers = {
+    "Authorization": f"Bearer {git_token}",
+    "Accept": "application/vnd.github.v3+json"
+}
 
 #extract the owner and repo name from the repo link
 def extract_repo_info(url):
@@ -46,7 +55,7 @@ def is_binary_extension(filename):
 #get the text format of the file from the GitHub URL
 def get_text_from_url(download_url):
     try:
-        response = requests.get(download_url)
+        response = requests.get(download_url, headers=headers)
         response.raise_for_status()
         # Try decoding as UTF-8. If it fails, we assume it's not a text file.
         return response.content.decode('utf-8')
@@ -63,7 +72,7 @@ def get_text_from_url(download_url):
 def process_directory(owner, repo, path=""):
     """Recursively process the directory at the given path."""
     api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"
-    response = requests.get(api_url)
+    response = requests.get(api_url, headers=headers)
     if response.status_code != 200:
         print(f"Error accessing {api_url}: {response.status_code}")
         return []
@@ -97,12 +106,13 @@ def process_directory(owner, repo, path=""):
 
 
 #create vector embedding of the combined text of the repository
+
 def vector_embdeddings(all_text):
     #Text spliiter
     text_splitter = RecursiveCharacterTextSplitter(
         separators=["\n\nclass ", "\n\ndef ", "\n\nasync def ", "\n# "],
-        chunk_size=500,
-        chunk_overlap=100
+        chunk_size=1200,
+        chunk_overlap=250
     )
     chunks = text_splitter.split_text(all_text)
 
@@ -120,3 +130,4 @@ def vector_embdeddings(all_text):
     )
 
     return ensemble_retriever
+    

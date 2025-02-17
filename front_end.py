@@ -7,9 +7,12 @@ from langchain.chains import create_retrieval_chain
 from src import *
 
 #set API key
-os.environ['OPENAI_API_KEY']= st.secrets["openAIKey"]
-groq_key=st.secrets["groqKey"]
+#os.environ['OPENAI_API_KEY']= st.secrets["openAIKey"]
+#groq_key=st.secrets["groqKey"]
 
+#set API key
+os.environ['OPENAI_API_KEY']="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"
+groq_key="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"
 
 #set up the model
 #initialise the langchain chat prompt template
@@ -192,6 +195,7 @@ with tab1:
             if "embeddings" not in st.session_state or not st.session_state["embeddings"]:
                 st.session_state["embeddings"] = vector_embdeddings(st.session_state['all_texts'])
                 st.warning('New embedding was created', icon="⚠️")
+                
             retrival_chain = create_retrieval_chain(st.session_state["embeddings"], document_chain)
             response = retrival_chain.invoke({'input': user_question})
             st.subheader("CodeLens Response:")
@@ -212,6 +216,12 @@ with tab2:
         Whether you're analyzing documentation, searching for code snippets, or just exploring a repo's content, **CodeLens** makes it easy! 🚀
         """
     )
+    with st.container():
+        st.header('✉️ Connect with me')
+        st.write("[Email >](sawantvishwajeet729@gmail.com)")
+        st.write("[LinkedIn >](https://www.linkedin.com/in/sawantvishwajeet729/)")
+        st.write("[Medium >](https://medium.com/@sawantvishwajeet729)")
+        st.write("[Github >](https://github.com/sawantvishwajeet729)")
 
 
 with tab3:
@@ -219,8 +229,8 @@ with tab3:
     st.header("☕ Donate")
     st.write (
         """
-        Hey there! 😊 Love CodeLens ? 🚀 Support us to keep it running and growing! Every little bit helps. 💙 Thank you!
-        !!!This link is not active right now!!!
+        Hey there! 😊 Love CodeLens ? 🚀 Support me to keep it running and making new free web apps! Every little bit helps. 💙 Thank you!
+        
         """
     )
     st.write("")
@@ -243,7 +253,7 @@ with tab3:
     }
     </style>
     
-    <a class="donate-button" href="https://www.paypal.com/donate/YOUR_LINK_HERE" target="_blank">
+    <a class="donate-button" href="https://buymeacoffee.com/sawantvishwajeet729" target="_blank">
         Buy me a Coffee 🧋
     </a>
     """,
