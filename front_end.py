@@ -163,7 +163,7 @@ with tab1:
 
             #get the repository files and combine
             owner, repo = extract_repo_info(repo_url)
-            all_texts = process_directory(owner, headers=headers, repo)
+            all_texts = process_directory(owner, repo, headers=headers)
             all_texts = "\n\n".join(all_texts)
             st.session_state['all_texts'] = all_texts
             st.success("Repository processed successfully!")
