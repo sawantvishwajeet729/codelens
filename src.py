@@ -52,7 +52,7 @@ def is_binary_extension(filename):
 
 
 #get the text format of the file from the GitHub URL
-def get_text_from_url(download_url):
+def get_text_from_url(download_url, headers=headers):
     try:
         response = requests.get(download_url, headers=headers)
         response.raise_for_status()
@@ -68,7 +68,7 @@ def get_text_from_url(download_url):
 
 
 #process the directory and get the text from the files
-def process_directory(owner, repo, path=""):
+def process_directory(owner, repo, headers=headers, path=""):
     """Recursively process the directory at the given path."""
     api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"
     response = requests.get(api_url, headers=headers)
@@ -94,7 +94,7 @@ def process_directory(owner, repo, path=""):
 
             download_url = item.get('download_url')
             if download_url:
-                file_text = get_text_from_url(download_url)
+                file_text = get_text_from_url(download_url, headers=headers)
                 if file_text is not None:
                     texts.append(
                         f"----- Start of file: {item.get('path')} -----\n"
