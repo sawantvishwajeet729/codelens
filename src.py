@@ -52,7 +52,14 @@ def is_binary_extension(filename):
 
 
 #get the text format of the file from the GitHub URL
-def get_text_from_url(download_url, headers=headers):
+def get_text_from_url(download_url):
+    git_token = st.secrets['git_token']
+
+    headers = {
+        "Authorization": f"Bearer {git_token}",
+        "Accept": "application/vnd.github.v3+json"
+    }
+
     try:
         response = requests.get(download_url, headers=headers)
         response.raise_for_status()
@@ -68,7 +75,13 @@ def get_text_from_url(download_url, headers=headers):
 
 
 #process the directory and get the text from the files
-def process_directory(owner, repo, headers=headers, path=""):
+def process_directory(owner, repo, path=""):
+    git_token = st.secrets['git_token']
+
+    headers = {
+        "Authorization": f"Bearer {git_token}",
+        "Accept": "application/vnd.github.v3+json"
+    }
     """Recursively process the directory at the given path."""
     api_url = f"https://api.github.com/repos/{owner}/{repo}/contents/{path}"
     response = requests.get(api_url, headers=headers)
@@ -94,7 +107,7 @@ def process_directory(owner, repo, headers=headers, path=""):
 
             download_url = item.get('download_url')
             if download_url:
-                file_text = get_text_from_url(download_url, headers=headers)
+                file_text = get_text_from_url(download_url)
                 if file_text is not None:
                     texts.append(
                         f"----- Start of file: {item.get('path')} -----\n"
