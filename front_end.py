@@ -144,7 +144,6 @@ st.markdown(
 with tab1:    
 
     # Home Section
-    st.write(headers)
     st.markdown('<div id="home"></div>', unsafe_allow_html=True)
     st.markdown('<h1 class="title">🔍 CodeLens</h1>', unsafe_allow_html=True)
     st.write(
